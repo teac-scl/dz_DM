@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>
+      Arrays & Functions
+    </title>
+  </head>
+  <style>
+    .wrapper {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <p>
+        JavaScript програма для перевірки успішності студентів з груп GROUP1,
+        GROUP2, GROUP3 з різними оцінками (значення рандомні) та виводуння  інформації по рейтингам на екран</br>
+         Оцінки:<br>
+          Хороші студенти: 89-100 <br>
+          Середні студенти: 65-88 <br>
+        Слабкі студенти: 0-64 <br>
+      </p>
+      <br>
+
+      <ul>
+        Вхідні дані:
+        <li>Масиви group1, group2, group3 з числами від 0 до 100</li>
+        <li>
+          Дві глобальні змінні averagePoint = 65 (середні результати),hightPoint
+          = 89 (найкращі результати)
+        </li>
+      </ul>
+      <br />
+   
+    <script>
+      var group1 = [
+          {
+              name: "Stuart Jimenez",
+          gnd: "male"
+          }, {
+              name: "Mike Presley",
+   gnd: "male"
+    },{
+        name: "Elbert Young",
+    gnd: "male"
+},{ 
+    name: "Hadwin Ortega",
+gnd: "male"
+  },{ 
+      name: "Leonard Hutchinson",
+  gnd: "male"
+        },{
+        name: "Elizabeth Fuller",
+        gnd: "female"
+    },{
+       name: "Pansy Boyd",
+       gnd: "female"
+   
+    },{  
+    name: "Wanda Burke",
+    gnd: "female"
+  
+},{name:"Harriet Moss",
+gnd: "female"},{
+    name:"Vera Foster",
+    gnd: "female"
+}];
+      var group2 = [
+          {name:"Oscar Fitzgerald",
+          gnd:"male"},
+          {name:"Peter Santiago", 
+          gnd:"male"
+          },
+          {name:"Abe Alexander",
+          gnd:"male"},
+          {name:"Orson Nicholls",
+          gnd:"male"},
+          {name:"Paisley Neel",
+          gnd:"female"},
+          {name:"Kay Hum",
+          gnd:"female"},
+          {name:"Juliet Snyder",
+          gnd:"female"},
+      ];
+      var group3 = [
+          {name:"Bailey Clem",
+          gnd:"male"
+          },
+          {name:"Linden Dixon",
+          gnd:"male"},
+          {name:"Tad Valdez",
+          gnd:"male"},
+          {name:"Harry Field",
+          gnd:"male"},
+          {name:"Stanley Massy",
+          gnd:"male"},
+          {name:"Dane Lamb",
+          gnd:"male"},
+
+          {name:"Thomasina Farmer",
+          gnd:"female"},
+          {name:"Emma Chandler",
+          gnd:"female"},
+          {name:"Justine Nichols",
+          gnd:"female"},
+          {name:"Fiona Skinner",
+          gnd:"female"},
+          {name:"Myrtle Davis",
+          gnd:"female"},
+          {name:"Elaine Terry",
+          gnd:"female"}
+          
+          ];
+      var averagePoint = 65;
+      var hightPoint = 89;
+
+      /*=================Початкові дані (ініціалізація)================================*/
+      function inputData() {
+      
+        editArrKey(group1,"GROUP_1")
+        editArrKey(group2,"GROUP_2")
+        editArrKey(group3,"GROUP_3")
+      }
+
+      
+        /*=================Заповнення оцінками таблиці групи студентів================================*/
+        function editArrKey(arrGroup,groupName){
+    const coursArr=["Maths","Physics", "Language", "History", "Biology","Geography"];
+    let n=1;
+    for (let student  of arrGroup){
+        let ch=(student.gnd=="male")? "m":"w";
+        student.photo=`avatar/${ch}${Math.floor(Math.random() * 6+1)}.png`;/* по 7 зображень*/
+        student.group=groupName;
+        student.course=coursArr[Math.floor(Math.random() * 6)] /*6 предметів*/
+        student.mark=Math.floor(Math.random() * 101);
+        student.id=n;
+        n+=1;
+    }
+    console.log(arrGroup);
+    return arrGroup;
+}
+        
+        
+        
+        
+    
+        
+      /*=================Об'єднання оцінок в одну таблицю ================================*/
+      function initStydent() {
+        var studentAll = [].concat(...arguments);
+
+        return studentAll;
+      }
+
+
+      function sortedStudent(avgPoint, hiPoint, arrStudent) {
+        var StudentBad=arrStudent.filter (function(item){return item.mark < avgPoint;});
+        console.dir(StudentBad);
+        var StudentNorm=arrStudent.filter (function(item){return item.mark >= avgPoint && item.mark < hiPoint;});
+        console.dir(StudentNorm);
+        var StudentGood=arrStudent.filter (function(item){return item.mark >= hiPoint;});
+      
+        console.dir(StudentGood);
+        var arrStudentSort = Array.of(studentGood, studentNorm, studentBad);
+       
+       return arrStudentSort;
+      }
+
+      
+      /* =========== Кроки виконання =========== */
+      inputData();
+      var allStudent = initStydent(group1, group2, group3);
+
+      var studentSortedMark = sortedStudent(
+        averagePoint,
+        hightPoint,
+        allStudent
+      );
+      
+    </script>
+     </div>
+  </body>
+</html>
