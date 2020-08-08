@@ -164,8 +164,10 @@ gnd: "female"},{
         var StudentGood=arrStudent.filter (function(item){return item.mark >= hiPoint;});
       
         console.dir(StudentGood);
-        /*var arrStudentSort = Array.of(studentGood, studentNorm, studentBad); - так не працює*/
-       var arrStudentSort=[].concat(StudentGood, StudentNorm, StudentBad);/*  так все працює*/
+       var arrStudentSort = Array.of(studentGood, studentNorm, studentBad);  /*- так не працює*/
+      /*  var arrStudentSort=[].concat(StudentGood, StudentNorm, StudentBad);-так все працює*/
+       /* var arrStudentSort=Array.of(...arrStudent.filter (function(item){return item.mark >= hiPoint;}),...arrStudent.filter (function(item){return item.mark >= avgPoint && item.mark < hiPoint;}),
+        ...arrStudent.filter (function(item){return item.mark < avgPoint;}));- так все працює*/
        return arrStudentSort;
       }
 
